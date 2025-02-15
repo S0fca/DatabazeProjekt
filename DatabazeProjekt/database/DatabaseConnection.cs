@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Configuration;
 
-namespace Databaze_24_1
+namespace DatabazeProjekt.database
 {
     internal class DatabaseConnection
     {

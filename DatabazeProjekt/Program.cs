@@ -1,4 +1,4 @@
-﻿using Databaze_24_1;
+﻿using DatabazeProjekt.database;
 using Microsoft.Data.SqlClient;
 
 namespace DatabazeProjekt
