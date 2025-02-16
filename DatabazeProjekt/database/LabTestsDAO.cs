@@ -1,4 +1,6 @@
 ﻿using DatabazeProjekt.Entities;
+using Microsoft.Data.SqlClient;
+using static Azure.Core.HttpHeader;
 
 namespace DatabazeProjekt.database
 {
@@ -14,14 +16,30 @@ namespace DatabazeProjekt.database
             throw new NotImplementedException();
         }
 
-        public List<LabTest> GetAll()
+        public IEnumerable<LabTest> GetAll()
         {
-            throw new NotImplementedException();
-        }
+            List<LabTest> labTests = new List<LabTest>();
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
-        public LabTest GetById(int id)
-        {
-            throw new NotImplementedException();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM labTests", conn))
+            {
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    LabTest labTest = new LabTest()
+                    {
+                        Id = Convert.ToInt32(reader[0].ToString()),
+                        Id_pat = Convert.ToInt32(reader[1].ToString()),
+                        Name = reader[2].ToString(),
+                        Tes_ok = Convert.ToBoolean(reader[3].ToString()),
+                        Result = reader[4].ToString(),
+                        Tes_dat = Convert.ToDateTime(reader[5].ToString()),
+                        Notes = reader[6].ToString()
+                    };
+                }
+                reader.Close();
+            }
+            return labTests;
         }
 
         public void Update(LabTest entity)

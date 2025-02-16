@@ -14,12 +14,7 @@ namespace DatabazeProjekt.database
             throw new NotImplementedException();
         }
 
-        public List<Report> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Report GetById(int id)
+        public IEnumerable<Report> GetAll()
         {
             throw new NotImplementedException();
         }

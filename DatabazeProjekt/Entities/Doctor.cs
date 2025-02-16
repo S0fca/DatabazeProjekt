@@ -21,6 +21,10 @@
             Specialization = specialization;
         }
 
+        public Doctor()
+        {
+        }
+
         public override string? ToString()
         {
             return $"Doctor[Name: {name} {surname}, Specialization: {specialization}]";

@@ -14,12 +14,7 @@ namespace DatabazeProjekt.database
             throw new NotImplementedException();
         }
 
-        public List<Visit> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Visit GetById(int id)
+        public IEnumerable<Visit> GetAll()
         {
             throw new NotImplementedException();
         }

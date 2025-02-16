@@ -30,6 +30,10 @@
             Notes = notes;
         }
 
+        public LabTest()
+        {
+        }
+
         public override string? ToString()
         {
             return $"LabTest[Patient ID: {id_pat}, Name: {name}, Result: {result}, Date: {tes_dat:yyyy-MM-dd}, OK: {tes_ok}, Notes: {notes}]";
