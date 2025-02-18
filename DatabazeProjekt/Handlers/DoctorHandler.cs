@@ -27,7 +27,7 @@ namespace DatabazeProjekt.Entities
 
             return doctor;
         }
-       
+
         private void EditDoctorInfo()
         {
             Console.WriteLine("Surname: ");

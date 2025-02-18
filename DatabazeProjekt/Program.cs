@@ -1,5 +1,4 @@
-﻿using DatabazeProjekt.database;
-using DatabazeProjekt.UI;
+﻿using DatabazeProjekt.UI;
 
 namespace DatabazeProjekt
 {
@@ -7,14 +6,8 @@ namespace DatabazeProjekt
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-
             ClinicConsole console = new ClinicConsole();
             console.Start();
-
-            //SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-
-            //DatabaseConnection.CloseConnection();
         }
     }
 }

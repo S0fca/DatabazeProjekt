@@ -39,8 +39,6 @@ namespace DatabazeProjekt.database
 
         public IEnumerable<Report> GetAll()
         {
-            List<Report> reports = new List<Report>();
-
             using (SqlCommand command = new SqlCommand("SELECT * FROM reports", conn))
             {
                 SqlDataReader reader = command.ExecuteReader();
@@ -57,11 +55,10 @@ namespace DatabazeProjekt.database
                         Conclusion = reader[6].ToString(),
                         Rep_dat = Convert.ToDateTime(reader[7])
                     };
-                    reports.Add(report);
+                    yield return report;
                 }
                 reader.Close();
             }
-            return reports;
         }
 
         public void Update(Report entity)

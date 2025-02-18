@@ -39,8 +39,6 @@ namespace DatabazeProjekt.database
 
         public IEnumerable<Visit> GetAll()
         {
-            List<Visit> visits = new List<Visit>();
-
             using (SqlCommand command = new SqlCommand("SELECT * FROM visits", conn))
             {
                 SqlDataReader reader = command.ExecuteReader();
@@ -55,11 +53,10 @@ namespace DatabazeProjekt.database
                         Vis_dat = Convert.ToDateTime(reader[4]),
                         Vis_price = Convert.ToDecimal(reader[5])
                     };
-                    visits.Add(visit);
+                    yield return visit;
                 }
                 reader.Close();
             }
-            return visits;
         }
 
         public void Update(Visit entity)

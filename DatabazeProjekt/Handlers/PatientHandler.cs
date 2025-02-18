@@ -13,11 +13,11 @@ namespace DatabazeProjekt.Entities
             return patientsDAO.GetAll().ToList();
         }
 
-        public Patient GetPatientInfo()
+        public static Patient GetPatientInfo()
         {
             string name = UserInputManager.GetStringInput("First name: ");
             string surname = UserInputManager.GetStringInput("Surname: ");
-            DateTime birthDate = UserInputManager.GetDateInput("Birth date: ");
+            DateTime birthDate = UserInputManager.GetDateInput("Birth date DD-MM-YYYY: ");
             string birthNum = GetBirthNum();
             string contact = UserInputManager.GetStringInput("Contact: ");
             decimal height = UserInputManager.GetDecimalInput("Height: ");
@@ -37,11 +37,22 @@ namespace DatabazeProjekt.Entities
             return patient;
         }
 
-        private void EditPatientInfo()
+        public static void EditPatientInfo()
         {
-            
 
-            
+            Patient patient = GetPatientByBirthNum();
+            Patient editedPatint = GetPatientInfo();
+            editedPatint.Id = patient.Id;
+
+            patientsDAO.Update(editedPatint);
+
+        }
+
+        public static void AddPatient()
+        {
+
+            patientsDAO.Add(GetPatientInfo());
+
         }
 
         public static Patient GetPatientByBirthNum()

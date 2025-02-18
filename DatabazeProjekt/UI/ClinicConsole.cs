@@ -1,8 +1,6 @@
-﻿using DatabazeProjekt.database;
-using DatabazeProjekt.Entities;
+﻿using DatabazeProjekt.Entities;
 using Microsoft.Data.SqlClient;
 using Mineraly.UserInterface;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DatabazeProjekt.UI
 {
@@ -74,25 +72,26 @@ namespace DatabazeProjekt.UI
 
             patientMenu.AddMenuItem(new MenuItem("View all patients", new Action(() =>
             {
-                foreach(Patient patient in PatientHandler.GetAllPatients())
+                foreach (Patient patient in PatientHandler.GetAllPatients())
                 {
                     Console.WriteLine(patient);
                 }
-            }))); 
-            
+            })));
+
             patientMenu.AddMenuItem(new MenuItem("Add new patient", new Action(() =>
             {
-
+                PatientHandler.AddPatient();
             })));
 
             patientMenu.AddMenuItem(new MenuItem("Edit patient information", new Action(() =>
             {
-
+                PatientHandler.EditPatientInfo();
+                Console.WriteLine("Patient information updated.");
             })));
 
-            patientMenu.AddMenuItem(new MenuItem("Search patient by surname", new Action(() =>
+            patientMenu.AddMenuItem(new MenuItem("Search patient by birth number", new Action(() =>
             {
-
+                Console.WriteLine(PatientHandler.GetPatientByBirthNum());
             })));
 
             patientMenu.AddMenuItem(new MenuItem("Main menu", new Action(() =>
@@ -106,22 +105,22 @@ namespace DatabazeProjekt.UI
         private Menu MenuDoctors()
         {
             Menu doctorMenu = new Menu("Select one option: ");
-            
+
             doctorMenu.AddMenuItem(new MenuItem("View all doctors", new Action(() =>
             {
-                foreach(Doctor doctor in DoctorHandler.GetAllDoctors())
+                foreach (Doctor doctor in DoctorHandler.GetAllDoctors())
                 {
                     Console.WriteLine(doctor);
                 }
             })));
             doctorMenu.AddMenuItem(new MenuItem("Search doctor by surname", new Action(() =>
             {
-                foreach(Doctor doctor in DoctorHandler.SearchDoctorBySurname())
+                foreach (Doctor doctor in DoctorHandler.SearchDoctorBySurname())
                 {
                     Console.WriteLine(doctor);
                 }
             })));
-            doctorMenu.AddMenuItem(new MenuItem("Main menu", new Action(() =>MainMenu())));
+            doctorMenu.AddMenuItem(new MenuItem("Main menu", new Action(() => MainMenu())));
 
             return doctorMenu;
         }
@@ -132,7 +131,7 @@ namespace DatabazeProjekt.UI
 
             visitsReportsMenu.AddMenuItem(new MenuItem("Add new visit", new Action(() =>
             {
-
+                VisitHandler.AddVisit();
             })));
 
             visitsReportsMenu.AddMenuItem(new MenuItem("Create report for visit", new Action(() =>
@@ -151,19 +150,18 @@ namespace DatabazeProjekt.UI
             })));
 
             return visitsReportsMenu;
-        
         }
 
         private Menu MenuTests()
         {
             Menu testsMenu = new Menu("Select one option: ");
-            
-            testsMenu.AddMenuItem(new MenuItem("Add new test", new Action(() =>
+
+            testsMenu.AddMenuItem(new MenuItem("View patients tests", new Action(() =>
             {
 
             })));
 
-            testsMenu.AddMenuItem(new MenuItem("Add test result", new Action(() =>
+            testsMenu.AddMenuItem(new MenuItem("Add new test", new Action(() =>
             {
 
             })));

@@ -39,8 +39,6 @@ namespace DatabazeProjekt.database
 
         public IEnumerable<Patient> GetAll()
         {
-            List<Patient> patients = new List<Patient>();
-
             using (SqlCommand command = new SqlCommand("SELECT * FROM patients", conn))
             {
                 SqlDataReader reader = command.ExecuteReader();
@@ -57,10 +55,10 @@ namespace DatabazeProjekt.database
                         Height = Convert.ToDecimal(reader[6]),
                         Weight = Convert.ToDecimal(reader[7])
                     };
+                    yield return patient;
                 }
                 reader.Close();
             }
-            return patients;
         }
 
         public Patient GetByBirthNum(string birht_num)
@@ -80,7 +78,7 @@ namespace DatabazeProjekt.database
                     Height = Convert.ToDecimal(reader[6]),
                     Weight = Convert.ToDecimal(reader[7])
                 };
-                reader
+                reader.Close();
                 return patient;
             }
         }

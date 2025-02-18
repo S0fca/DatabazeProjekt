@@ -8,7 +8,7 @@ namespace DatabazeProjekt.database
         SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
         public void Add(Doctor entity)
-        { 
+        {
             using (SqlCommand command = new SqlCommand($"INSERT INTO doctors VALUES ('{entity.Name}', '{entity.Surname}', '{entity.Specialization}')", conn))
             {
                 int rowsAffected = command.ExecuteNonQuery();
@@ -33,8 +33,6 @@ namespace DatabazeProjekt.database
 
         public IEnumerable<Doctor> GetAll()
         {
-            List<Doctor> doctors = new List<Doctor>();
-
             using (SqlCommand command = new SqlCommand("SELECT * FROM doctors", conn))
             {
                 SqlDataReader reader = command.ExecuteReader();
@@ -47,10 +45,10 @@ namespace DatabazeProjekt.database
                         Surname = reader[2].ToString(),
                         Specialization = reader[3].ToString()
                     };
+                    yield return doctor;
                 }
                 reader.Close();
             }
-            return doctors;
         }
 
         public IEnumerable<Doctor> GetBySurname(string surname)

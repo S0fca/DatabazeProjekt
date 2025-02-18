@@ -1,6 +1,5 @@
 ﻿using DatabazeProjekt.Entities;
 using Microsoft.Data.SqlClient;
-using static Azure.Core.HttpHeader;
 
 namespace DatabazeProjekt.database
 {
@@ -18,7 +17,6 @@ namespace DatabazeProjekt.database
 
         public IEnumerable<LabTest> GetAll()
         {
-            List<LabTest> labTests = new List<LabTest>();
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
             using (SqlCommand command = new SqlCommand("SELECT * FROM labTests", conn))
@@ -36,10 +34,10 @@ namespace DatabazeProjekt.database
                         Tes_dat = Convert.ToDateTime(reader[5].ToString()),
                         Notes = reader[6].ToString()
                     };
+                    yield return labTest;
                 }
                 reader.Close();
             }
-            return labTests;
         }
 
         public void Update(LabTest entity)

@@ -1,23 +1,18 @@
-﻿namespace DatabazeProjekt.Entities
+﻿using DatabazeProjekt.UI;
+
+namespace DatabazeProjekt.Entities
 {
     internal class VisitHandler
     {
 
         public static void AddVisit()
         {
-            //Id_pat = id_pat;
-            //Id_doc = id_doc;
-
-            //Vis_reason = vis_reason;
-            //Vis_dat = vis_dat;
-            //Vis_price = vis_price;
-
-
             Patient patient = PatientHandler.GetPatientByBirthNum();
 
             Doctor doctor;
 
             List<Doctor> doctors = DoctorHandler.SearchDoctorBySurname();
+
             if (doctors.Count == 0)
             {
                 Console.WriteLine("Doctor not found");
@@ -34,52 +29,23 @@
                 {
                     Console.WriteLine(i + 1 + ". " + doctors[i]);
                 }
-                string num;
-                int number;
+                int number = 0;
                 do
                 {
-                    Console.WriteLine("Which one: ");
-                    num = Console.ReadLine().Trim();
-
-                } while (string.IsNullOrWhiteSpace(num) || !int.TryParse(num, out number));
-                doctor = doctors[number];
+                    number = UserInputManager.GetIntInput("Which one: ");
+                } while (number <= 0 || number > doctors.Count);
+                doctor = doctors[number - 1];
             }
 
-            Console.WriteLine("Visit reason: ");
-            string reason = Console.ReadLine();
+            string reason = UserInputManager.GetStringInput("Visit reason: ");
 
-            DateTime visitDate;
-            while (true)
+            DateTime visitDate = UserInputManager.GetDateInput("Visit date and time (DD-MM-YYYY HH:mm): ");
+
+            decimal price = 0;
+            do
             {
-                Console.WriteLine("Visit date and time (DD-MM-YYYY HH:mm): ");
-                string input = Console.ReadLine().Trim();
-
-                if (DateTime.TryParseExact(input, "dd-MM-yyyy HH:mm", null, System.Globalization.DateTimeStyles.None, out visitDate))
-                {
-                    Console.WriteLine($"You entered: {visitDate:dd-MM-yyyy HH:mm}");
-                    break; // Exit loop if valid
-                }
-                else
-                {
-                    Console.WriteLine("Invalid format. Please enter the date and time as DD-MM-YYYY HH:mm.");
-                }
-            }
-
-            decimal price;
-            while (true)
-            {
-                Console.WriteLine("Visit price: ");
-                string input = Console.ReadLine().Trim();
-
-                if (decimal.TryParse(input, out price) && price >= 0)
-                {
-                    break; // Exit loop if valid
-                }
-                else
-                {
-                    Console.WriteLine("Invalid price. Please enter a valid number (e.g., 50.00).");
-                }
-            }
+                price = UserInputManager.GetDecimalInput("Visit price: ");
+            } while (price < 0);
 
             Visit visit = new Visit
             {
@@ -92,6 +58,5 @@
 
             Console.WriteLine(visit);
         }
-
     }
 }
