@@ -52,6 +52,7 @@ namespace DatabazeProjekt.database
             }
             return doctors;
         }
+
         public IEnumerable<Doctor> GetBySurname(string surname)
         {
             List<Doctor> doctors = new List<Doctor>();

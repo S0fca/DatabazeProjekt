@@ -21,18 +21,6 @@
         public decimal Height { get => height; set => height = value; }
         public decimal Weight { get => weight; set => weight = value; }
 
-        public Patient(int id, string name, string surname, DateTime birth_dat, string birth_num, string contact, decimal height, decimal weight)
-        {
-            Id = id;
-            Name = name;
-            Surname = surname;
-            Birth_dat = birth_dat;
-            Birth_num = birth_num;
-            Contact = contact;
-            Height = height;
-            Weight = weight;
-        }
-
         public override string? ToString()
         {
             return $"Patient[Name: {name} {surname}, Birth Date: {birth_dat:yyyy-MM-dd}, Birth Number: {birth_num}, Contact: {contact}, Height: {height}m, Weight: {weight}kg]";

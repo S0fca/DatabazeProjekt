@@ -21,18 +21,6 @@
         public string Conclusion { get => conclusion; set => conclusion = value; }
         public DateTime Rep_dat { get => rep_dat; set => rep_dat = value; }
 
-        public Report(int id, int id_vis, string symptoms, string diagnosis, string recommendation, string treatment, string conclusion, DateTime rep_dat)
-        {
-            Id = id;
-            Id_vis = id_vis;
-            Symptoms = symptoms;
-            Diagnosis = diagnosis;
-            Recommendation = recommendation;
-            Treatment = treatment;
-            Conclusion = conclusion;
-            Rep_dat = rep_dat;
-        }
-
         public override string? ToString()
         {
             return $"Report[Visit ID: {id_vis}, Symptoms: {symptoms}, Diagnosis: {diagnosis}, Recommendation: {recommendation}, Treatment: {treatment}, Conclusion: {conclusion}, Date: {rep_dat:yyyy-MM-dd HH:mm}]";

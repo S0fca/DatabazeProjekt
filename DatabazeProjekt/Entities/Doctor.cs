@@ -13,18 +13,6 @@
         public string Surname { get => surname; set => surname = value; }
         public string Specialization { get => specialization; set => specialization = value; }
 
-        public Doctor(int id, string name, string surname, string specialization)
-        {
-            Id = id;
-            Name = name;
-            Surname = surname;
-            Specialization = specialization;
-        }
-
-        public Doctor()
-        {
-        }
-
         public override string? ToString()
         {
             return $"Doctor[Name: {name} {surname}, Specialization: {specialization}]";

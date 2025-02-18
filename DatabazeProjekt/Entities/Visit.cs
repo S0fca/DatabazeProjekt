@@ -17,16 +17,6 @@
         public DateTime Vis_dat { get => vis_dat; set => vis_dat = value; }
         public decimal Vis_price { get => vis_price; set => vis_price = value; }
 
-        public Visit(int id, int id_pat, int id_doc, string vis_reason, DateTime vis_dat, decimal vis_price)
-        {
-            Id = id;
-            Id_pat = id_pat;
-            Id_doc = id_doc;
-            Vis_reason = vis_reason;
-            Vis_dat = vis_dat;
-            Vis_price = vis_price;
-        }
-
         public override string? ToString()
         {
             return $"Visit[Patient ID: {id_pat}, Doctor ID: {id_doc}, Reason: {vis_reason}, Date: {vis_dat:yyyy-MM-dd HH:mm}, Price: {vis_price:C}]";

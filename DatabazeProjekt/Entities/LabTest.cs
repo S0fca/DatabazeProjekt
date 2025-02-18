@@ -19,21 +19,6 @@
         public DateTime Tes_dat { get => tes_dat; set => tes_dat = value; }
         public string Notes { get => notes; set => notes = value; }
 
-        public LabTest(int id, int id_pat, string name, bool tes_ok, string result, DateTime tes_dat, string notes)
-        {
-            Id = id;
-            Id_pat = id_pat;
-            Name = name;
-            Tes_ok = tes_ok;
-            Result = result;
-            Tes_dat = tes_dat;
-            Notes = notes;
-        }
-
-        public LabTest()
-        {
-        }
-
         public override string? ToString()
         {
             return $"LabTest[Patient ID: {id_pat}, Name: {name}, Result: {result}, Date: {tes_dat:yyyy-MM-dd}, OK: {tes_ok}, Notes: {notes}]";
