@@ -23,7 +23,7 @@
 
         public override string? ToString()
         {
-            return $"Report[Visit ID: {id_vis}, Symptoms: {symptoms}, Diagnosis: {diagnosis}, Recommendation: {recommendation}, Treatment: {treatment}, Conclusion: {conclusion}, Date: {rep_dat:yyyy-MM-dd HH:mm}]";
+            return $"Symptoms: {symptoms}, Diagnosis: {diagnosis}, Recommendation: {recommendation}, Treatment: {treatment}, Conclusion: {conclusion}, Date: {rep_dat:yyyy-MM-dd HH:mm}";
         }
 
     }

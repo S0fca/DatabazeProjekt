@@ -41,45 +41,24 @@ namespace DatabazeProjekt.database
         {
             using (SqlCommand command = new SqlCommand("SELECT * FROM patients", conn))
             {
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    Patient patient = new Patient()
+                    while (reader.Read())
                     {
-                        Id = Convert.ToInt32(reader[0].ToString()),
-                        Name = reader[1].ToString(),
-                        Surname = reader[2].ToString(),
-                        Birth_dat = Convert.ToDateTime(reader[3]),
-                        Birth_num = reader[4].ToString(),
-                        Contact = reader[5].ToString(),
-                        Height = Convert.ToDecimal(reader[6]),
-                        Weight = Convert.ToDecimal(reader[7])
-                    };
-                    yield return patient;
+                        Patient patient = new Patient()
+                        {
+                            Id = Convert.ToInt32(reader[0].ToString()),
+                            Name = reader[1].ToString(),
+                            Surname = reader[2].ToString(),
+                            Birth_dat = Convert.ToDateTime(reader[3]),
+                            Birth_num = reader[4].ToString(),
+                            Contact = reader[5].ToString(),
+                            Height = Convert.ToDecimal(reader[6]),
+                            Weight = Convert.ToDecimal(reader[7])
+                        };
+                        yield return patient;
+                    }
                 }
-                reader.Close();
-            }
-        }
-
-        public Patient GetByBirthNum(string birht_num)
-        {
-            using (SqlCommand command = new SqlCommand($"SELECT * FROM patients WHERE birth_num = '{birht_num}'", conn))
-            {
-                SqlDataReader reader = command.ExecuteReader();
-                reader.Read();
-                Patient patient = new Patient()
-                {
-                    Id = Convert.ToInt32(reader[0].ToString()),
-                    Name = reader[1].ToString(),
-                    Surname = reader[2].ToString(),
-                    Birth_dat = Convert.ToDateTime(reader[3]),
-                    Birth_num = reader[4].ToString(),
-                    Contact = reader[5].ToString(),
-                    Height = Convert.ToDecimal(reader[6]),
-                    Weight = Convert.ToDecimal(reader[7])
-                };
-                reader.Close();
-                return patient;
             }
         }
 

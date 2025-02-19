@@ -1,4 +1,6 @@
-﻿namespace DatabazeProjekt.UI
+﻿using Microsoft.IdentityModel.Tokens;
+
+namespace DatabazeProjekt.UI
 {
     internal class UserInputManager
     {
@@ -16,6 +18,13 @@
 
             return input;
         }
+
+        public static string? GetStringInputOptional(string prompt)
+        {
+            Console.WriteLine("(optional) " + prompt);
+            return Console.ReadLine().Trim();
+        }
+
 
         public static int GetIntInput(string prompt)
         {
@@ -45,6 +54,21 @@
             return result;
         }
 
+        public static DateTime? GetDateInputOptional(string prompt)
+        {
+            DateTime result;
+            string input;
+            do
+            {
+                Console.WriteLine("(optional) "+prompt);
+                input = Console.ReadLine().Trim();
+                if (input.IsNullOrEmpty()) return null;
+            }
+            while (!DateTime.TryParse(input, out result));
+
+            return result;
+        }
+
         public static decimal GetDecimalInput(string prompt)
         {
             decimal result;
@@ -59,5 +83,22 @@
             return result;
         }
 
+        public static bool? GetBoolInputOptional(string prompt)
+        {
+            string input;
+            while (true)
+            {
+                Console.WriteLine($"(optional) (yes/no) {prompt}");
+                input = Console.ReadLine().Trim().ToLower();
+
+                if (input.IsNullOrEmpty()) return null;
+                if (input == "yes" || input == "y")
+                    return true;
+                if (input == "no" || input == "n")
+                    return false;
+
+                Console.WriteLine("Invalid input. Please enter 'yes' or 'no'.");
+            }
+        }
     }
 }

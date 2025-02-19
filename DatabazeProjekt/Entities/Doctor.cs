@@ -15,7 +15,7 @@
 
         public override string? ToString()
         {
-            return $"Doctor[Name: {name} {surname}, Specialization: {specialization}]";
+            return $"Name: {name} {surname}, Specialization: {specialization}";
         }
     }
 }

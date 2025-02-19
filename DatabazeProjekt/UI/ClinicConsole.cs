@@ -77,27 +77,46 @@ namespace DatabazeProjekt.UI
                     Console.WriteLine(patient);
                 }
             })));
-
             patientMenu.AddMenuItem(new MenuItem("Add new patient", new Action(() =>
             {
                 PatientHandler.AddPatient();
             })));
-
             patientMenu.AddMenuItem(new MenuItem("Edit patient information", new Action(() =>
             {
                 PatientHandler.EditPatientInfo();
                 Console.WriteLine("Patient information updated.");
             })));
-
             patientMenu.AddMenuItem(new MenuItem("Search patient by birth number", new Action(() =>
             {
-                Console.WriteLine(PatientHandler.GetPatientByBirthNum());
+                Patient? patient = PatientHandler.GetPatientByBirthNum();
+                if (patient is null)
+                {
+                    Console.WriteLine("Patient not found.");
+                    return;
+                }
+                Console.WriteLine(patient);
+            })));
+            patientMenu.AddMenuItem(new MenuItem("View patients visits", new Action(() =>
+            {
+                List<Visit>? visits = VisitHandler.GetPatientsVisits();
+
+                if (visits is not null && visits.Count == 0)
+                {
+                    Console.WriteLine("Patient has no visits.");
+                }
+                else if (visits is not null)
+                {
+                    foreach (Visit visit in visits)
+                    {
+                        Patient patient = PatientHandler.GetPatientById(visit.Id_pat);
+                        Doctor doctor = DoctorHandler.GetDoctorById(visit.Id_doc);
+                        Console.WriteLine(visit + " Doctor: " + doctor + "Patient: " + patient);
+                    }
+                }
+
             })));
 
-            patientMenu.AddMenuItem(new MenuItem("Main menu", new Action(() =>
-            {
-                MainMenu();
-            })));
+            patientMenu.AddMenuItem(new MenuItem("Main menu", new Action(() => MainMenu())));
 
             return patientMenu;
         }
@@ -129,21 +148,33 @@ namespace DatabazeProjekt.UI
         {
             Menu visitsReportsMenu = new Menu("Select one option: ");
 
+            visitsReportsMenu.AddMenuItem(new MenuItem("View visits", new Action(() =>
+            {
+                foreach (Visit visit in VisitHandler.GetAllVisits())
+                {
+                    Console.WriteLine(visit);
+                }
+            })));
+            visitsReportsMenu.AddMenuItem(new MenuItem("View reports", new Action(() =>
+            {
+                foreach (Report report in ReportHandler.GetAllReports())
+                {
+                    Console.WriteLine(report);
+                }
+            })));
             visitsReportsMenu.AddMenuItem(new MenuItem("Add new visit", new Action(() =>
             {
                 VisitHandler.AddVisit();
             })));
-
             visitsReportsMenu.AddMenuItem(new MenuItem("Create report for visit", new Action(() =>
             {
+                Visit? visit = VisitHandler.GetVisit();
 
+                if (visit is not null)
+                {
+                    ReportHandler.AddReport(visit.Id);
+                }
             })));
-
-            visitsReportsMenu.AddMenuItem(new MenuItem("Edit visit", new Action(() =>
-            {
-
-            })));
-
             visitsReportsMenu.AddMenuItem(new MenuItem("Main menu", new Action(() =>
             {
                 MainMenu();
@@ -156,16 +187,17 @@ namespace DatabazeProjekt.UI
         {
             Menu testsMenu = new Menu("Select one option: ");
 
-            testsMenu.AddMenuItem(new MenuItem("View patients tests", new Action(() =>
+            testsMenu.AddMenuItem(new MenuItem("View tests", new Action(() =>
             {
-
+                foreach (LabTest labTest in LabTestHandler.GetAllTests())
+                {
+                    Console.WriteLine(labTest);
+                }
             })));
-
             testsMenu.AddMenuItem(new MenuItem("Add new test", new Action(() =>
             {
-
+                LabTestHandler.AddTest();
             })));
-
             testsMenu.AddMenuItem(new MenuItem("Main menu", new Action(() =>
             {
                 MainMenu();

@@ -11,7 +11,7 @@ namespace DatabazeProjekt.database
         {
             using (SqlCommand command = new SqlCommand($"INSERT INTO reports (visits_id_vis, symptoms, diagnosis, recommendation, treatment, conclusion, rep_dat) " +
                                               $"VALUES ({entity.Id_vis}, '{entity.Symptoms}', '{entity.Diagnosis}', '{entity.Recommendation}', " +
-                                              $"'{entity.Treatment}', '{entity.Conclusion}', '{entity.Rep_dat.ToString("yyyy-MM-dd HH:mm:ss")}')", conn))
+                                              $"'{entity.Treatment}', '{entity.Conclusion}', '{entity.Rep_dat}')", conn))
             {
                 int rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected == 1)
@@ -27,37 +27,31 @@ namespace DatabazeProjekt.database
 
         public void Delete(int id)
         {
-            using (SqlCommand command = new SqlCommand($"DELETE FROM reports WHERE id_rep = {id}", conn))
-            {
-                int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected == 0)
-                {
-                    throw new Exception("Report not found.");
-                }
-            }
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Report> GetAll()
         {
             using (SqlCommand command = new SqlCommand("SELECT * FROM reports", conn))
             {
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    Report report = new Report()
+                    while (reader.Read())
                     {
-                        Id = Convert.ToInt32(reader[0].ToString()),
-                        Id_vis = Convert.ToInt32(reader[1].ToString()),
-                        Symptoms = reader[2].ToString(),
-                        Diagnosis = reader[3].ToString(),
-                        Recommendation = reader[4].ToString(),
-                        Treatment = reader[5].ToString(),
-                        Conclusion = reader[6].ToString(),
-                        Rep_dat = Convert.ToDateTime(reader[7])
-                    };
-                    yield return report;
+                        Report report = new Report()
+                        {
+                            Id = Convert.ToInt32(reader[0].ToString()),
+                            Id_vis = Convert.ToInt32(reader[1].ToString()),
+                            Symptoms = reader[2].ToString(),
+                            Diagnosis = reader[3].ToString(),
+                            Recommendation = reader[4].ToString(),
+                            Treatment = reader[5].ToString(),
+                            Conclusion = reader[6].ToString(),
+                            Rep_dat = Convert.ToDateTime(reader[7])
+                        };
+                        yield return report;
+                    }
                 }
-                reader.Close();
             }
         }
 

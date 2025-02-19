@@ -41,21 +41,22 @@ namespace DatabazeProjekt.database
         {
             using (SqlCommand command = new SqlCommand("SELECT * FROM visits", conn))
             {
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    Visit visit = new Visit()
+                    while (reader.Read())
                     {
-                        Id = Convert.ToInt32(reader[0].ToString()),
-                        Id_pat = Convert.ToInt32(reader[1].ToString()),
-                        Id_doc = Convert.ToInt32(reader[2].ToString()),
-                        Vis_reason = reader[3].ToString(),
-                        Vis_dat = Convert.ToDateTime(reader[4]),
-                        Vis_price = Convert.ToDecimal(reader[5])
-                    };
-                    yield return visit;
+                        Visit visit = new Visit()
+                        {
+                            Id = Convert.ToInt32(reader[0].ToString()),
+                            Id_pat = Convert.ToInt32(reader[1].ToString()),
+                            Id_doc = Convert.ToInt32(reader[2].ToString()),
+                            Vis_reason = reader[3].ToString(),
+                            Vis_dat = Convert.ToDateTime(reader[4]),
+                            Vis_price = Convert.ToDecimal(reader[5])
+                        };
+                        yield return visit;
+                    }
                 }
-                reader.Close();
             }
         }
 

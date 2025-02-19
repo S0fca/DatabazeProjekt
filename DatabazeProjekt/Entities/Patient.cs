@@ -23,7 +23,7 @@
 
         public override string? ToString()
         {
-            return $"Patient[Name: {name} {surname}, Birth Date: {birth_dat:yyyy-MM-dd}, Birth Number: {birth_num}, Contact: {contact}, Height: {height}m, Weight: {weight}kg]";
+            return $"Name: {name} {surname}, Birth Date: {birth_dat:yyyy-MM-dd}, Birth Number: {birth_num}, Contact: {contact}, Height: {height}cm, Weight: {weight}kg";
         }
 
     }

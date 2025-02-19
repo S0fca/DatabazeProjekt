@@ -19,7 +19,7 @@
 
         public override string? ToString()
         {
-            return $"Visit[Patient ID: {id_pat}, Doctor ID: {id_doc}, Reason: {vis_reason}, Date: {vis_dat:yyyy-MM-dd HH:mm}, Price: {vis_price:C}]";
+            return $"Reason: {vis_reason}, Date: {vis_dat:yyyy-MM-dd HH:mm}, Price: {vis_price} CZK";
         }
 
     }

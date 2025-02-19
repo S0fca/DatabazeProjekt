@@ -1,5 +1,6 @@
 ﻿using DatabazeProjekt.database;
 using DatabazeProjekt.UI;
+using System.Text.RegularExpressions;
 
 namespace DatabazeProjekt.Entities
 {
@@ -40,7 +41,13 @@ namespace DatabazeProjekt.Entities
         public static void EditPatientInfo()
         {
 
-            Patient patient = GetPatientByBirthNum();
+            Patient? patient = GetPatientByBirthNum();
+            if (patient is null)
+            {
+                Console.WriteLine("Patient not found.");
+                return;
+            }
+            Console.WriteLine(patient);
             Patient editedPatint = GetPatientInfo();
             editedPatint.Id = patient.Id;
 
@@ -50,22 +57,29 @@ namespace DatabazeProjekt.Entities
 
         public static void AddPatient()
         {
-
             patientsDAO.Add(GetPatientInfo());
-
         }
 
-        public static Patient GetPatientByBirthNum()
+        public static Patient? GetPatientByBirthNum()
         {
             string birthNum = GetBirthNum();
 
-            return patientsDAO.GetByBirthNum(birthNum);
+            return patientsDAO.GetAll().Where(x => x.Birth_num.Equals(birthNum)).FirstOrDefault();
         }
 
         private static string GetBirthNum()
         {
-            return UserInputManager.GetStringInput("Patients birth number: ");
+            string birthNum = "";
+            do
+            {
+                birthNum = UserInputManager.GetStringInput("Patients birth number: ");
+            } while (!Regex.IsMatch(birthNum, @"\d{6}\/\d{4}$"));
+            return birthNum;
         }
 
+        public static Patient GetPatientById(int id)
+        {
+            return patientsDAO.GetAll().Where(x => x.Id == id).FirstOrDefault();
+        }
     }
 }

@@ -1,13 +1,25 @@
-﻿using DatabazeProjekt.UI;
+﻿using DatabazeProjekt.database;
+using DatabazeProjekt.UI;
 
 namespace DatabazeProjekt.Entities
 {
     internal class VisitHandler
     {
+        private static VisitsDAO visitsDAO = new VisitsDAO();
+
+        public static List<Visit> GetAllVisits()
+        {
+            return visitsDAO.GetAll().ToList();
+        }
 
         public static void AddVisit()
         {
-            Patient patient = PatientHandler.GetPatientByBirthNum();
+            Patient? patient = PatientHandler.GetPatientByBirthNum();
+            if (patient is null)
+            {
+                Console.WriteLine("Patient not found.");
+                return;
+            }
 
             Doctor doctor;
 
@@ -57,6 +69,49 @@ namespace DatabazeProjekt.Entities
             };
 
             Console.WriteLine(visit);
+            visitsDAO.Add(visit);
+        }
+
+        public static List<Visit>? GetPatientsVisits()
+        {
+            Patient? patient = PatientHandler.GetPatientByBirthNum();
+            if (patient is null)
+            {
+                Console.WriteLine("Patient not found.");
+                return null;
+            }
+            List<Visit> visits = visitsDAO.GetAll().Where(x => x.Id_pat == patient.Id).ToList();
+            return visits;
+        }
+
+        public static Visit? GetVisit()
+        {
+            Visit? visit = null;
+            Patient? patient = PatientHandler.GetPatientByBirthNum();
+            if (patient is null)
+            {
+                Console.WriteLine("Patient not found.");
+                return null;
+            }
+            DateTime visDat = UserInputManager.GetDateInput("Visits date: ");
+            List<Visit> visits = visitsDAO.GetAll().Where(x => x.Id_pat == patient.Id).Where(x => x.Vis_dat == visDat).ToList();
+            if (visits is null || visits.Count == 0)
+            {
+                Console.WriteLine("No visits fond.");
+            }
+            else if (visits is not null && visits.Count > 1)
+            {
+                for (int i = 1; i < visits.Count - 1; i++)
+                {
+                    Console.WriteLine(i + ". " + visits[i]);
+                }
+                visit = visits[UserInputManager.GetIntInput("Which one: ")];
+            }
+            else
+            {
+                visit = visits[0];
+            }
+            return visit;
         }
     }
 }
