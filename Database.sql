@@ -27,7 +27,7 @@ CREATE TABLE [dbo].[labTests](
 	[name] [varchar](255) NOT NULL,
 	[tes_ok] [bit] NULL,
 	[result] [varchar](500) NULL,
-	[tes_dat] [date] NOT NULL,
+	[tes_dat] [date] NULL,
 	[notes] [varchar](500) NULL,
 PRIMARY KEY CLUSTERED 
 (
@@ -46,7 +46,7 @@ CREATE TABLE [dbo].[patients](
 	[surname] [varchar](50) NOT NULL,
 	[birth_dat] [date] NOT NULL,
 	[birth_num] [varchar](11) NOT NULL,
-	[contact] [varchar](100) NULL,
+	[contact] [varchar](100) NOT NULL,
 	[height] [decimal](5, 2) NULL,
 	[weight] [decimal](5, 2) NULL,
 PRIMARY KEY CLUSTERED 
@@ -86,7 +86,7 @@ CREATE TABLE [dbo].[visits](
 	[doctors_id_doc] [int] NOT NULL,
 	[vis_reason] [varchar](255) NOT NULL,
 	[vis_dat] [datetime] NOT NULL,
-	[vis_price] [decimal](8, 2) NULL,
+	[vis_price] [decimal](8, 2) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_vis] ASC
