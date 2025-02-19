@@ -60,7 +60,7 @@ namespace DatabazeProjekt.UI
             string input;
             do
             {
-                Console.WriteLine("(optional) "+prompt);
+                Console.WriteLine("(optional) " + prompt);
                 input = Console.ReadLine().Trim();
                 if (input.IsNullOrEmpty()) return null;
             }
@@ -77,6 +77,21 @@ namespace DatabazeProjekt.UI
             {
                 Console.WriteLine(prompt);
                 input = Console.ReadLine().Trim();
+            }
+            while (!decimal.TryParse(input, out result) || result < 0);
+
+            return result;
+        }
+
+        public static decimal? GetDecimalInputOptional(string prompt)
+        {
+            decimal result;
+            string input;
+            do
+            {
+                Console.WriteLine("(optional) "+prompt);
+                input = Console.ReadLine().Trim();
+                if (input.IsNullOrEmpty()) return null;
             }
             while (!decimal.TryParse(input, out result) || result < 0);
 

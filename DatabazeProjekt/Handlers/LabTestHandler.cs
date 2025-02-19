@@ -32,24 +32,11 @@ namespace DatabazeProjekt.Entities
             {
                 Id_pat = patient.Id,
                 Name = name,
+                Tes_ok = testOk,
+                Result = result,
+                Tes_dat = testDate,
+                Notes = notes
             };
-
-            if (testOk is not null)
-            {
-                labTest.Tes_ok = (bool)testOk;
-            }
-            if (result is not null)
-            {
-                labTest.Result = (string)result;
-            }
-            if (testDate is not null)
-            {
-                labTest.Tes_dat = (DateTime)testDate;
-            }
-            if (notes is not null)
-            {
-                labTest.Notes = (string)notes;
-            }
 
             labTestsDAO.Add(labTest);
 

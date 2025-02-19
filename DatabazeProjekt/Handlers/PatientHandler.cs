@@ -21,8 +21,8 @@ namespace DatabazeProjekt.Entities
             DateTime birthDate = UserInputManager.GetDateInput("Birth date DD-MM-YYYY: ");
             string birthNum = GetBirthNum();
             string contact = UserInputManager.GetStringInput("Contact: ");
-            decimal height = UserInputManager.GetDecimalInput("Height: ");
-            decimal weight = UserInputManager.GetDecimalInput("Weight");
+            decimal? height = UserInputManager.GetDecimalInputOptional("Height: ");
+            decimal? weight = UserInputManager.GetDecimalInputOptional("Weight");
 
             Patient patient = new Patient
             {

@@ -1,4 +1,6 @@
-﻿namespace DatabazeProjekt.Entities
+﻿using Microsoft.IdentityModel.Tokens;
+
+namespace DatabazeProjekt.Entities
 {
     internal class LabTest
     {
@@ -21,7 +23,7 @@
 
         public override string? ToString()
         {
-            return $"Name: {name}, Result: {result}, Date: {tes_dat:yyyy-MM-dd}, OK: {tes_ok}, Notes: {notes}";
+            return $"Name: {name}, Test ok: {((tes_ok is null) ? "-" : ("" + (((bool)tes_ok) ? "Yes" : "No")))}, Result: {((result is null) ? "-" : result)}, Date: {((tes_dat is null) ? "-" : tes_dat.Value.ToString("yyyy-MM-dd"))}, Notes: {((notes.IsNullOrEmpty()) ? "" : notes)}";
         }
 
     }
