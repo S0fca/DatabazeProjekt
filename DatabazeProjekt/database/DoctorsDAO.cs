@@ -1,5 +1,6 @@
 ﻿using DatabazeProjekt.Entities;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace DatabazeProjekt.database
 {
@@ -25,10 +26,10 @@ namespace DatabazeProjekt.database
                     {
                         Doctor doctor = new Doctor()
                         {
-                            Id = Convert.ToInt32(reader[0].ToString()),
-                            Name = reader[1].ToString(),
-                            Surname = reader[2].ToString(),
-                            Specialization = reader[3].ToString()
+                            Id = reader.GetInt32("id_doc"),
+                            Name = reader.GetString("name"),
+                            Surname = reader.GetString("surname"),
+                            Specialization = reader.GetString("specialization")
                         };
                         yield return doctor;
                     }

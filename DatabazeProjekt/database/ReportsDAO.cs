@@ -1,5 +1,6 @@
 ﻿using DatabazeProjekt.Entities;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace DatabazeProjekt.database
 {
@@ -48,14 +49,14 @@ namespace DatabazeProjekt.database
                     {
                         Report report = new Report()
                         {
-                            Id = Convert.ToInt32(reader[0].ToString()),
-                            Id_vis = Convert.ToInt32(reader[1].ToString()),
-                            Symptoms = reader[2].ToString(),
-                            Diagnosis = reader[3].ToString(),
-                            Recommendation = reader[4].ToString(),
-                            Treatment = reader[5].ToString(),
-                            Conclusion = reader[6].ToString(),
-                            Rep_dat = Convert.ToDateTime(reader[7])
+                            Id = reader.GetInt32("id_rep"),
+                            Id_vis = reader.GetInt32("visits_id_vis"),
+                            Symptoms = reader.GetString("symptoms"),
+                            Diagnosis = reader.IsDBNull("diagnosis") ? (string?)null : reader.GetString("diagnosis"),
+                            Recommendation = reader.IsDBNull("recommendation") ? (string?)null : reader.GetString("recommendation"),
+                            Treatment = reader.IsDBNull("treatment") ? (string?)null : reader.GetString("treatment"),
+                            Conclusion = reader.GetString("conclusion"),
+                            Rep_dat = reader.GetDateTime("rep_dat")
                         };
                         yield return report;
                     }

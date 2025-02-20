@@ -62,8 +62,8 @@ namespace DatabazeProjekt.Entities
 
             Visit visit = new Visit
             {
-                Id_pat = patient.Id,
-                Id_doc = doctor.Id,
+                Patient = patient,
+                Doctor = doctor,
                 Vis_reason = reason,
                 Vis_dat = visitDate,
                 Vis_price = price
@@ -88,7 +88,7 @@ namespace DatabazeProjekt.Entities
                 Console.WriteLine("Patient not found.");
                 return null;
             }
-            List<Visit> visits = visitsDAO.GetAll().Where(x => x.Id_pat == patient.Id).ToList();
+            List<Visit> visits = visitsDAO.GetAll().Where(x => x.Patient.Id == patient.Id).ToList();
             return visits;
         }
 
@@ -102,7 +102,7 @@ namespace DatabazeProjekt.Entities
                 return null;
             }
             DateTime visDat = UserInputManager.GetDateInput("Visits date: ");
-            List<Visit> visits = visitsDAO.GetAll().Where(x => x.Id_pat == patient.Id).Where(x => x.Vis_dat == visDat).ToList();
+            List<Visit> visits = visitsDAO.GetAll().Where(x => x.Patient.Id == patient.Id).Where(x => x.Vis_dat == visDat).ToList();
             if (visits is null || visits.Count == 0)
             {
                 Console.WriteLine("No visits fond.");
@@ -127,40 +127,40 @@ namespace DatabazeProjekt.Entities
             return visitsDAO.GetAll().Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public static void AddVisitXML(string file)
-        {
-            try
-            {
-                XDocument xmlDoc = XDocument.Load(file);
+        //public static void AddVisitXML(string file)
+        //{
+        //    try
+        //    {
+        //        XDocument xmlDoc = XDocument.Load(file);
 
-                foreach (var visit in xmlDoc.Descendants("Visit"))
-                {
-                    int patientId = int.Parse(visit.Element("PatientId").Value);
-                    int doctorId = int.Parse(visit.Element("DoctorId").Value);
-                    string reason = visit.Element("Reason").Value;
-                    DateTime visitDate = DateTime.Parse(visit.Element("VisitDate").Value);
-                    decimal price = decimal.Parse(visit.Element("Price").Value);
+        //        foreach (var visit in xmlDoc.Descendants("Visit"))
+        //        {
+        //            int patientId = int.Parse(visit.Element("PatientId").Value);
+        //            int doctorId = int.Parse(visit.Element("DoctorId").Value);
+        //            string reason = visit.Element("Reason").Value;
+        //            DateTime visitDate = DateTime.Parse(visit.Element("VisitDate").Value);
+        //            decimal price = decimal.Parse(visit.Element("Price").Value);
 
-                    Visit visit1 = new Visit
-                    {
-                        Id_pat = patientId,
-                        Id_doc = doctorId,
-                        Vis_reason = reason,
-                        Vis_dat = visitDate,
-                        Vis_price = price
-                    };
+        //            Visit visit1 = new Visit
+        //            {
+        //                Id_pat = patientId,
+        //                Id_doc = doctorId,
+        //                Vis_reason = reason,
+        //                Vis_dat = visitDate,
+        //                Vis_price = price
+        //            };
 
-                    Console.WriteLine(visit1);
+        //            Console.WriteLine(visit1);
 
-                    visitsDAO.Add(visit1);
-                }
+        //            visitsDAO.Add(visit1);
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error processing XML file: {ex.Message}");
-            }
-        }
-    
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error processing XML file: {ex.Message}");
+        //    }
+        //}
+
     }
 }

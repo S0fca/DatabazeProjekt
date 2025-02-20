@@ -59,7 +59,7 @@ namespace DatabazeProjekt.UI
                 })));
             mainMenu.AddMenuItem(new MenuItem("Exit program", new Action(() => { exit = true; })));
             mainMenu.AddMenuItem(new MenuItem("Import XML data", new Action(() => {
-                VisitHandler.AddVisitXML("visit.xml");
+                //VisitHandler.AddVisitXML("visit.xml");
                 ReportHandler.AddReportXML("report.xml");
             })));
 
@@ -111,9 +111,7 @@ namespace DatabazeProjekt.UI
                 {
                     foreach (Visit visit in visits)
                     {
-                        Patient patient = PatientHandler.GetPatientById(visit.Id_pat);
-                        Doctor doctor = DoctorHandler.GetDoctorById(visit.Id_doc);
-                        Console.WriteLine(visit + " Doctor: " + doctor + "Patient: " + patient);
+                        Console.WriteLine(visit + "\n\tDoctor: " + visit.Doctor);
                     }
                 }
 
@@ -139,7 +137,7 @@ namespace DatabazeProjekt.UI
             doctorMenu.AddMenuItem(new MenuItem("Search doctor by surname", new Action(() =>
             {
                 List<Doctor> doctors = DoctorHandler.SearchDoctorBySurname();
-                if (doctors is null ||doctors.Count == 0)
+                if (doctors is null || doctors.Count == 0)
                 {
                     Console.WriteLine("No doctors found.");
                 }
@@ -165,9 +163,7 @@ namespace DatabazeProjekt.UI
                 Console.WriteLine("Visits: ");
                 foreach (Visit visit in VisitHandler.GetAllVisits())
                 {
-                    Patient patient = PatientHandler.GetPatientById(visit.Id_pat);
-                    Doctor doctor = DoctorHandler.GetDoctorById(visit.Id_doc);
-                    Console.WriteLine(visit + "\n\tPatient: "+patient +"\n\tDoctor: "+ doctor);
+                    Console.WriteLine(visit + "\n\tPatient: " + visit.Patient + "\n\tDoctor: " + visit.Doctor);
                 }
             })));
             visitsReportsMenu.AddMenuItem(new MenuItem("View reports", new Action(() =>
@@ -176,9 +172,8 @@ namespace DatabazeProjekt.UI
                 foreach (Report report in ReportHandler.GetAllReports())
                 {
                     Visit visit = VisitHandler.GetVisitById(report.Id_vis);
-                    Patient patient = PatientHandler.GetPatientById(visit.Id_pat);
-                    Doctor doctor = DoctorHandler.GetDoctorById(visit.Id_doc);
-                    Console.WriteLine(report + "\n\tPatient: " + patient + "\n\tDoctor: " + doctor);
+
+                    Console.WriteLine(report + "\n\tPatient: " + visit.Patient + "\n\tDoctor: " + visit.Doctor);
                 }
             })));
             visitsReportsMenu.AddMenuItem(new MenuItem("Add new visit", new Action(() =>

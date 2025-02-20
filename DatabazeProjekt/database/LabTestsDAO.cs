@@ -1,5 +1,6 @@
 ﻿using DatabazeProjekt.Entities;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace DatabazeProjekt.database
 {
@@ -36,13 +37,13 @@ namespace DatabazeProjekt.database
                     {
                         LabTest labTest = new LabTest()
                         {
-                            Id = Convert.ToInt32(reader[0].ToString()),
-                            Id_pat = Convert.ToInt32(reader[1].ToString()),
-                            Name = reader[2].ToString(),
-                            Tes_ok = Convert.ToBoolean(reader[3].ToString()),
-                            Result = reader[4].ToString(),
-                            Tes_dat = Convert.ToDateTime(reader[5].ToString()),
-                            Notes = reader[6].ToString()
+                            Id = reader.GetInt32("id_tes"),
+                            Id_pat = reader.GetInt32("patients_id_pat"),
+                            Name = reader.GetString("name"),
+                            Tes_ok = reader.GetBoolean("tes_ok"),
+                            Result = reader.GetString("result"),
+                            Tes_dat = reader.GetDateTime("tes_dat"),
+                            Notes = reader.GetString("notes")//null
                         };
                         yield return labTest;
                     }
