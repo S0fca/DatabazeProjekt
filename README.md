@@ -4,10 +4,10 @@ This console application simulates a doctor's office and uses a Microsoft SQL Se
 ## Setup Instructions
 ### 1. Download the project 
 1. You should be here: https://github.com/S0fca/DatabazeProjekt
-2. Click on **Releases** and from **Assets** 
-3. download `DatabaseProject.zip`
-4. download `Database.sql`
-5. Extract the zip
+2. Click on **Releases** and from **Assets** download
+   - `DatabaseProject.zip`
+   - `Database.sql`
+3. Extract the zip
 
 ### 2. Create database
 1. Open **Microsoft SQL Server Management Studio**.
