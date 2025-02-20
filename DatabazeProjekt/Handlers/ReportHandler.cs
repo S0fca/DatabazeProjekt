@@ -71,7 +71,7 @@ namespace DatabazeProjekt.Entities
 
                     Console.WriteLine(report1);
 
-                    //reportsDAO.Add(report1);
+                    reportsDAO.Add(report1);
                 }
 
             }

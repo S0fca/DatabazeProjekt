@@ -152,7 +152,7 @@ namespace DatabazeProjekt.Entities
 
                     Console.WriteLine(visit1);
 
-                    //visitsDAO.Add(visit1);
+                    visitsDAO.Add(visit1);
                 }
 
             }

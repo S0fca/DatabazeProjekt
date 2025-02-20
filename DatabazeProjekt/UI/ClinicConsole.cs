@@ -58,6 +58,10 @@ namespace DatabazeProjekt.UI
                     item.Execute();
                 })));
             mainMenu.AddMenuItem(new MenuItem("Exit program", new Action(() => { exit = true; })));
+            mainMenu.AddMenuItem(new MenuItem("Import XML data", new Action(() => {
+                VisitHandler.AddVisitXML("visit.xml");
+                ReportHandler.AddReportXML("report.xml");
+            })));
 
             while (!exit)
             {
