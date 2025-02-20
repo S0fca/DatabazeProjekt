@@ -1,6 +1,6 @@
 USE [clinic]
 GO
-/****** Object:  Table [dbo].[doctors]    Script Date: 19/02/2025 23:03:45 ******/
+/****** Object:  Table [dbo].[doctors]    Script Date: 20/02/2025 14:15:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -16,7 +16,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[labTests]    Script Date: 19/02/2025 23:03:45 ******/
+/****** Object:  Table [dbo].[labTests]    Script Date: 20/02/2025 14:15:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -35,7 +35,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[patients]    Script Date: 19/02/2025 23:03:45 ******/
+/****** Object:  Table [dbo].[patients]    Script Date: 20/02/2025 14:15:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -55,7 +55,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[reports]    Script Date: 19/02/2025 23:03:45 ******/
+/****** Object:  Table [dbo].[reports]    Script Date: 20/02/2025 14:15:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -75,7 +75,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[visits]    Script Date: 19/02/2025 23:03:45 ******/
+/****** Object:  Table [dbo].[visits]    Script Date: 20/02/2025 14:15:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -113,13 +113,21 @@ INSERT [dbo].[doctors] ([id_doc], [name], [surname], [specialization]) VALUES (8
 GO
 SET IDENTITY_INSERT [dbo].[doctors] OFF
 GO
+SET IDENTITY_INSERT [dbo].[labTests] ON 
+GO
+INSERT [dbo].[labTests] ([id_tes], [patients_id_pat], [name], [tes_ok], [result], [tes_dat], [notes]) VALUES (1, 2, N'MRI', 1, N'', CAST(N'2024-02-28' AS Date), NULL)
+GO
+SET IDENTITY_INSERT [dbo].[labTests] OFF
+GO
 SET IDENTITY_INSERT [dbo].[patients] ON 
 GO
 INSERT [dbo].[patients] ([id_pat], [name], [surname], [birth_dat], [birth_num], [contact], [height], [weight]) VALUES (1, N'Jan', N'Novák', CAST(N'1985-06-15' AS Date), N'850615/1234', N'jan.novak@email.com', CAST(180.50 AS Decimal(5, 2)), CAST(75.20 AS Decimal(5, 2)))
 GO
-INSERT [dbo].[patients] ([id_pat], [name], [surname], [birth_dat], [birth_num], [contact], [height], [weight]) VALUES (2, N'Petra', N'Svobodová', CAST(N'1992-12-03' AS Date), N'921203/5678', NULL, NULL, CAST(68.40 AS Decimal(5, 2)))
+INSERT [dbo].[patients] ([id_pat], [name], [surname], [birth_dat], [birth_num], [contact], [height], [weight]) VALUES (2, N'Petra', N'Svobodová', CAST(N'1992-12-03' AS Date), N'921203/5678', N'petra.svobodova@email.com', NULL, CAST(68.40 AS Decimal(5, 2)))
 GO
 INSERT [dbo].[patients] ([id_pat], [name], [surname], [birth_dat], [birth_num], [contact], [height], [weight]) VALUES (3, N'Tomáš', N'Dvorák', CAST(N'1978-09-27' AS Date), N'780927/4321', N'tomas.dvorak@email.com', CAST(175.00 AS Decimal(5, 2)), NULL)
+GO
+INSERT [dbo].[patients] ([id_pat], [name], [surname], [birth_dat], [birth_num], [contact], [height], [weight]) VALUES (4, N'Eliska', N'Novotná', CAST(N'2004-05-12' AS Date), N'045512/6789', N'eliska.novotna@email.com', CAST(166.00 AS Decimal(5, 2)), CAST(58.00 AS Decimal(5, 2)))
 GO
 SET IDENTITY_INSERT [dbo].[patients] OFF
 GO
@@ -132,6 +140,10 @@ GO
 SET IDENTITY_INSERT [dbo].[visits] ON 
 GO
 INSERT [dbo].[visits] ([id_vis], [patients_id_pat], [doctors_id_doc], [vis_reason], [vis_dat], [vis_price]) VALUES (1, 1, 1, N'Routine check-up', CAST(N'2024-02-18T10:30:00.000' AS DateTime), CAST(0.00 AS Decimal(8, 2)))
+GO
+INSERT [dbo].[visits] ([id_vis], [patients_id_pat], [doctors_id_doc], [vis_reason], [vis_dat], [vis_price]) VALUES (2, 2, 2, N'Headaches', CAST(N'2024-02-20T00:00:00.000' AS DateTime), CAST(0.00 AS Decimal(8, 2)))
+GO
+INSERT [dbo].[visits] ([id_vis], [patients_id_pat], [doctors_id_doc], [vis_reason], [vis_dat], [vis_price]) VALUES (3, 4, 7, N'Routine eye check-up', CAST(N'2025-02-18T10:30:00.000' AS DateTime), CAST(0.00 AS Decimal(8, 2)))
 GO
 SET IDENTITY_INSERT [dbo].[visits] OFF
 GO
