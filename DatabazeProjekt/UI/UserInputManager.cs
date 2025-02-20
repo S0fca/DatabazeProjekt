@@ -115,5 +115,22 @@ namespace DatabazeProjekt.UI
                 Console.WriteLine("Invalid input. Please enter 'yes' or 'no'.");
             }
         }
+
+        public static bool GetBoolInput(string prompt)
+        {
+            string input;
+            while (true)
+            {
+                Console.WriteLine($"(optional) (yes/no) {prompt}");
+                input = Console.ReadLine().Trim().ToLower();
+
+                if (input == "yes" || input == "y")
+                    return true;
+                if (input == "no" || input == "n")
+                    return false;
+
+                Console.WriteLine("Invalid input. Please enter 'yes' or 'no'.");
+            }
+        }
     }
 }

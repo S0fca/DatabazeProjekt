@@ -9,10 +9,16 @@ namespace DatabazeProjekt.database
 
         public void Add(Visit entity)
         {
-            using (SqlCommand command = new SqlCommand($"INSERT INTO visits (patients_id_pat, doctors_id_doc, vis_reason, vis_dat, vis_price) " +
-                                              $"VALUES ({entity.Id_pat}, {entity.Id_doc}, '{entity.Vis_reason}', " +
-                                              $"'{entity.Vis_dat.ToString("yyyy-MM-dd HH:mm:ss")}', {entity.Vis_price})", conn))
+            using (SqlCommand command = new SqlCommand(
+    "INSERT INTO visits (patients_id_pat, doctors_id_doc, vis_reason, vis_dat, vis_price) " +
+    "VALUES (@PatientId, @DoctorId, @VisitReason, @VisitDate, @VisitPrice)", conn))
             {
+                command.Parameters.AddWithValue("@PatientId", entity.Id_pat);
+                command.Parameters.AddWithValue("@DoctorId", entity.Id_doc);
+                command.Parameters.AddWithValue("@VisitReason", entity.Vis_reason);
+                command.Parameters.AddWithValue("@VisitDate", entity.Vis_dat);
+                command.Parameters.AddWithValue("@VisitPrice", entity.Vis_price);
+
                 int rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected == 1)
                 {

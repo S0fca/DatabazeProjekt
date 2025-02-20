@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Reports>
+	<Report>
+		<VisitId>1</VisitId>
+		<Symptoms>Routine cardiology check-up</Symptoms>
+		<Diagnosis></Diagnosis>
+		<Recommendation></Recommendation>
+		<Treatment></Treatment>
+		<Conclusion>No significant changes, patient is stable</Conclusion>
+		<ReportDate>2024-08-18 12:05</ReportDate>
+	</Report>
+</Reports>

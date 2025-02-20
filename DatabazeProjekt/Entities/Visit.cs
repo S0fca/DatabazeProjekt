@@ -19,7 +19,7 @@
 
         public override string? ToString()
         {
-            return $"Reason: {vis_reason}, Date: {vis_dat:DD-MM-YYYY HH:mm}, Price: {vis_price} CZK";
+            return $"Reason: {vis_reason}, Date: {vis_dat:dd-MM-yyyy HH:mm}, Price: {vis_price} CZK";
         }
 
     }

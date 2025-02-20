@@ -9,10 +9,18 @@ namespace DatabazeProjekt.database
 
         public void Add(Patient entity)
         {
-            using (SqlCommand command = new SqlCommand($"INSERT INTO patients (name, surname, birth_dat, birth_num, contact, height, weight) " +
-                                             $"VALUES ('{entity.Name}', '{entity.Surname}', '{entity.Birth_dat.ToString("yyyy-MM-dd")}', " +
-                                             $"'{entity.Birth_num}', '{entity.Contact}', {entity.Height}, {entity.Weight})", conn))
+            using (SqlCommand command = new SqlCommand(
+    "INSERT INTO patients (name, surname, birth_dat, birth_num, contact, height, weight) " +
+    "VALUES (@Name, @Surname, @BirthDat, @BirthNum, @Contact, @Height, @Weight)", conn))
             {
+                command.Parameters.AddWithValue("@Name", entity.Name);
+                command.Parameters.AddWithValue("@Surname", entity.Surname);
+                command.Parameters.AddWithValue("@BirthDat", entity.Birth_dat);
+                command.Parameters.AddWithValue("@BirthNum", entity.Birth_num);
+                command.Parameters.AddWithValue("@Contact", entity.Contact);
+                command.Parameters.AddWithValue("@Height", entity.Height.HasValue ? (object)entity.Height.Value : DBNull.Value);
+                command.Parameters.AddWithValue("@Weight", entity.Weight.HasValue ? (object)entity.Weight.Value : DBNull.Value);
+
                 int rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected == 1)
                 {
@@ -64,11 +72,20 @@ namespace DatabazeProjekt.database
 
         public void Update(Patient entity)
         {
-            using (SqlCommand command = new SqlCommand($"UPDATE patients SET name = '{entity.Name}', surname = '{entity.Surname}', " +
-                                              $"birth_dat = '{entity.Birth_dat.ToString("yyyy-MM-dd")}', birth_num = '{entity.Birth_num}', " +
-                                              $"contact = '{entity.Contact}', height = {entity.Height}, weight = {entity.Weight} " +
-                                              $"WHERE id_pat = {entity.Id}", conn))
+            using (SqlCommand command = new SqlCommand(
+    "UPDATE patients SET name = @Name, surname = @Surname, birth_dat = @BirthDate, " +
+    "birth_num = @BirthNum, contact = @Contact, height = @Height, weight = @Weight " +
+    "WHERE id_pat = @PatientId", conn))
             {
+                command.Parameters.AddWithValue("@Name", entity.Name);
+                command.Parameters.AddWithValue("@Surname", entity.Surname);
+                command.Parameters.AddWithValue("@BirthDate", entity.Birth_dat);
+                command.Parameters.AddWithValue("@BirthNum", entity.Birth_num);
+                command.Parameters.AddWithValue("@Contact", entity.Contact);
+                command.Parameters.AddWithValue("@Height", entity.Height.HasValue ? (object)entity.Height : DBNull.Value);
+                command.Parameters.AddWithValue("@Weight", entity.Weight.HasValue ? (object)entity.Weight : DBNull.Value);
+                command.Parameters.AddWithValue("@PatientId", entity.Id);
+
                 int rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected == 0)
                 {

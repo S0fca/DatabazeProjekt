@@ -1,5 +1,6 @@
 ﻿using DatabazeProjekt.database;
 using DatabazeProjekt.UI;
+using System.Xml.Linq;
 
 namespace DatabazeProjekt.Entities
 {
@@ -70,6 +71,13 @@ namespace DatabazeProjekt.Entities
 
             Console.WriteLine(visit);
             visitsDAO.Add(visit);
+
+            bool report = UserInputManager.GetBoolInput("Add report?");
+            if (report)
+            {
+                ReportHandler.AddReport(visit.Id);
+            }
+
         }
 
         public static List<Visit>? GetPatientsVisits()
@@ -118,5 +126,41 @@ namespace DatabazeProjekt.Entities
         {
             return visitsDAO.GetAll().Where(x => x.Id == id).FirstOrDefault();
         }
+
+        public static void AddVisitXML(string file)
+        {
+            try
+            {
+                XDocument xmlDoc = XDocument.Load(file);
+
+                foreach (var visit in xmlDoc.Descendants("Visit"))
+                {
+                    int patientId = int.Parse(visit.Element("PatientId").Value);
+                    int doctorId = int.Parse(visit.Element("DoctorId").Value);
+                    string reason = visit.Element("Reason").Value;
+                    DateTime visitDate = DateTime.Parse(visit.Element("VisitDate").Value);
+                    decimal price = decimal.Parse(visit.Element("Price").Value);
+
+                    Visit visit1 = new Visit
+                    {
+                        Id_pat = patientId,
+                        Id_doc = doctorId,
+                        Vis_reason = reason,
+                        Vis_dat = visitDate,
+                        Vis_price = price
+                    };
+
+                    Console.WriteLine(visit1);
+
+                    //visitsDAO.Add(visit1);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error processing XML file: {ex.Message}");
+            }
+        }
+    
     }
 }

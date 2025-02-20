@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Visits>
+	<Visit>
+		<PatientId>1</PatientId>
+		<DoctorId>1</DoctorId>
+		<Reason>Routine check-up</Reason>
+		<VisitDate>2024-08-18T11:45:00</VisitDate>
+		<Price>0.00</Price>
+	</Visit>
+</Visits>

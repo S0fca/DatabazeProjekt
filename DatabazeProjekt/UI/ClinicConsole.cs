@@ -85,7 +85,6 @@ namespace DatabazeProjekt.UI
             patientMenu.AddMenuItem(new MenuItem("Edit patient information", new Action(() =>
             {
                 PatientHandler.EditPatientInfo();
-                Console.WriteLine("Patient information updated.");
             })));
             patientMenu.AddMenuItem(new MenuItem("Search patient by birth number", new Action(() =>
             {

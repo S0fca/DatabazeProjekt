@@ -48,11 +48,13 @@ namespace DatabazeProjekt.Entities
                 return;
             }
             Console.WriteLine(patient);
+
             Patient editedPatint = GetPatientInfo();
+
             editedPatint.Id = patient.Id;
 
             patientsDAO.Update(editedPatint);
-
+            Console.WriteLine("Patient information updated.");
         }
 
         public static void AddPatient()

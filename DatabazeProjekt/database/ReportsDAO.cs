@@ -9,10 +9,18 @@ namespace DatabazeProjekt.database
 
         public void Add(Report entity)
         {
-            using (SqlCommand command = new SqlCommand($"INSERT INTO reports (visits_id_vis, symptoms, diagnosis, recommendation, treatment, conclusion, rep_dat) " +
-                                              $"VALUES ({entity.Id_vis}, '{entity.Symptoms}', '{entity.Diagnosis}', '{entity.Recommendation}', " +
-                                              $"'{entity.Treatment}', '{entity.Conclusion}', '{entity.Rep_dat}')", conn))
+            using (SqlCommand command = new SqlCommand(
+    "INSERT INTO reports (visits_id_vis, symptoms, diagnosis, recommendation, treatment, conclusion, rep_dat) " +
+    "VALUES (@VisitId, @Symptoms, @Diagnosis, @Recommendation, @Treatment, @Conclusion, @ReportDate)", conn))
             {
+                command.Parameters.AddWithValue("@VisitId", entity.Id_vis);
+                command.Parameters.AddWithValue("@Symptoms", entity.Symptoms);
+                command.Parameters.AddWithValue("@Diagnosis", string.IsNullOrEmpty(entity.Diagnosis) ? (object)DBNull.Value : entity.Diagnosis);
+                command.Parameters.AddWithValue("@Recommendation", string.IsNullOrEmpty(entity.Recommendation) ? (object)DBNull.Value : entity.Recommendation);
+                command.Parameters.AddWithValue("@Treatment", string.IsNullOrEmpty(entity.Treatment) ? (object)DBNull.Value : entity.Treatment);
+                command.Parameters.AddWithValue("@Conclusion", entity.Conclusion);
+                command.Parameters.AddWithValue("@ReportDate", entity.Rep_dat);
+
                 int rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected == 1)
                 {
