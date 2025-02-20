@@ -113,5 +113,10 @@ namespace DatabazeProjekt.Entities
             }
             return visit;
         }
+
+        public static Visit GetVisitById(int id)
+        {
+            return visitsDAO.GetAll().Where(x => x.Id == id).FirstOrDefault();
+        }
     }
 }

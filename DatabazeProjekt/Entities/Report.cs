@@ -25,7 +25,7 @@ namespace DatabazeProjekt.Entities
 
         public override string? ToString()
         {
-            return $"Symptoms: {symptoms}, Diagnosis: {((diagnosis.IsNullOrEmpty())?"-":diagnosis)}, Recommendation: {((recommendation.IsNullOrEmpty()) ? "-" : recommendation)}, Treatment: {((treatment.IsNullOrEmpty()) ? "-" : treatment)}, Conclusion: {conclusion}, Date: {rep_dat:yyyy-MM-dd HH:mm}";
+            return $"Symptoms: {symptoms}, Diagnosis: {((diagnosis.IsNullOrEmpty())?"-":diagnosis)}, Recommendation: {((recommendation.IsNullOrEmpty()) ? "-" : recommendation)}, Treatment: {((treatment.IsNullOrEmpty()) ? "-" : treatment)}, Conclusion: {conclusion}, Date: {rep_dat:dd-MM-yyyy HH:mm}";
         }
 
     }

@@ -63,8 +63,9 @@ namespace DatabazeProjekt.Entities
         public static Patient? GetPatientByBirthNum()
         {
             string birthNum = GetBirthNum();
-
-            return patientsDAO.GetAll().Where(x => x.Birth_num.Equals(birthNum)).FirstOrDefault();
+            Patient patient = patientsDAO.GetAll().Where(x => x.Birth_num.Equals(birthNum)).FirstOrDefault();
+            Console.WriteLine(patient);
+            return patient;
         }
 
         private static string GetBirthNum()
@@ -77,7 +78,7 @@ namespace DatabazeProjekt.Entities
             return birthNum;
         }
 
-        public static Patient GetPatientById(int id)
+        public static Patient? GetPatientById(int id)
         {
             return patientsDAO.GetAll().Where(x => x.Id == id).FirstOrDefault();
         }

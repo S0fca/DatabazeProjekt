@@ -38,7 +38,7 @@ namespace DatabazeProjekt.Entities
                 Notes = notes
             };
 
-            labTestsDAO.Add(labTest);
+             labTestsDAO.Add(labTest);
 
         }
     }

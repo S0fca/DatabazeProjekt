@@ -23,7 +23,7 @@ namespace DatabazeProjekt.Entities
 
         public override string? ToString()
         {
-            return $"Name: {name}, Test ok: {((tes_ok is null) ? "-" : ("" + (((bool)tes_ok) ? "Yes" : "No")))}, Result: {((result is null) ? "-" : result)}, Date: {((tes_dat is null) ? "-" : tes_dat.Value.ToString("yyyy-MM-dd"))}, Notes: {((notes.IsNullOrEmpty()) ? "" : notes)}";
+            return $"Name: {name}, Test ok: {((tes_ok is null) ? "-" : ("" + (((bool)tes_ok) ? "Yes" : "No")))}, Result: {((result is null) ? "-" : result)}, Date: {((tes_dat is null) ? "-" : tes_dat.Value.ToString("dd-MM-yyyy"))}, Notes: {((notes.IsNullOrEmpty()) ? "" : notes)}";
         }
 
     }

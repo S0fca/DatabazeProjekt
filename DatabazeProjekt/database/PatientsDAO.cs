@@ -47,14 +47,14 @@ namespace DatabazeProjekt.database
                     {
                         Patient patient = new Patient()
                         {
-                            Id = Convert.ToInt32(reader[0].ToString()),
-                            Name = reader[1].ToString(),
-                            Surname = reader[2].ToString(),
-                            Birth_dat = Convert.ToDateTime(reader[3]),
-                            Birth_num = reader[4].ToString(),
-                            Contact = reader[5].ToString(),
-                            Height = Convert.ToDecimal(reader[6]),
-                            Weight = Convert.ToDecimal(reader[7])
+                            Id = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Surname = reader.GetString(2),
+                            Birth_dat = reader.GetDateTime(3),
+                            Birth_num = reader.GetString(4),
+                            Contact = reader.GetString(5),
+                            Height = reader.IsDBNull(6) ? (decimal?)null : reader.GetDecimal(6),
+                            Weight = reader.IsDBNull(7) ? (decimal?)null : reader.GetDecimal(7)
                         };
                         yield return patient;
                     }
