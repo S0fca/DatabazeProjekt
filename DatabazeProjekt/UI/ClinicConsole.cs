@@ -59,7 +59,7 @@ namespace DatabazeProjekt.UI
                 })));
             mainMenu.AddMenuItem(new MenuItem("Exit program", new Action(() => { exit = true; })));
             mainMenu.AddMenuItem(new MenuItem("Import XML data", new Action(() => {
-                //VisitHandler.AddVisitXML("visit.xml");
+                VisitHandler.AddVisitXML("visit.xml");
                 ReportHandler.AddReportXML("report.xml");
             })));
 
@@ -137,7 +137,8 @@ namespace DatabazeProjekt.UI
             doctorMenu.AddMenuItem(new MenuItem("Search doctor by surname", new Action(() =>
             {
                 List<Doctor> doctors = DoctorHandler.SearchDoctorBySurname();
-                if (doctors is null || doctors.Count == 0)
+                Console.WriteLine(doctors.Count);
+                if (doctors.Count == 0)
                 {
                     Console.WriteLine("No doctors found.");
                 }

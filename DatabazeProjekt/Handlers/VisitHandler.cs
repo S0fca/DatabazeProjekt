@@ -8,11 +8,26 @@ namespace DatabazeProjekt.Entities
     {
         private static VisitsDAO visitsDAO = new VisitsDAO();
 
+        /// <summary>
+        /// gets all visits
+        /// </summary>
+        /// <returns>all visits</returns>
         public static List<Visit> GetAllVisits()
         {
-            return visitsDAO.GetAll().ToList();
+            List<Visit> visits = visitsDAO.GetAll().ToList();
+
+            if (visits.Count == 0)
+            {
+                Console.WriteLine("No visits found.");
+            }
+
+            return visits;
         }
 
+        /// <summary>
+        /// gets visit info
+        /// adds the visit to DB
+        /// </summary>
         public static void AddVisit()
         {
             Patient? patient = PatientHandler.GetPatientByBirthNum();
@@ -38,7 +53,7 @@ namespace DatabazeProjekt.Entities
             }
             else
             {
-                for (int i = 0; i < (doctors.Count - 1); i++)
+                for (int i = 0; i < (doctors.Count); i++)
                 {
                     Console.WriteLine(i + 1 + ". " + doctors[i]);
                 }
@@ -80,6 +95,10 @@ namespace DatabazeProjekt.Entities
 
         }
 
+        /// <summary>
+        /// gets all patients visits
+        /// </summary>
+        /// <returns></returns>
         public static List<Visit>? GetPatientsVisits()
         {
             Patient? patient = PatientHandler.GetPatientByBirthNum();
@@ -92,6 +111,10 @@ namespace DatabazeProjekt.Entities
             return visits;
         }
 
+        /// <summary>
+        /// gets a specific visit
+        /// </summary>
+        /// <returns>a visit by patients and date</returns>
         public static Visit? GetVisit()
         {
             Visit? visit = null;
@@ -122,45 +145,56 @@ namespace DatabazeProjekt.Entities
             return visit;
         }
 
-        public static Visit GetVisitById(int id)
+        /// <summary>
+        /// gets visit by id
+        /// </summary>
+        /// <param name="id">visits id</param>
+        /// <returns>visit by id</returns>
+        public static Visit? GetVisitById(int id)
         {
-            return visitsDAO.GetAll().Where(x => x.Id == id).FirstOrDefault();
+            return visitsDAO.GetById(id);
         }
 
-        //public static void AddVisitXML(string file)
-        //{
-        //    try
-        //    {
-        //        XDocument xmlDoc = XDocument.Load(file);
+        /// <summary>
+        /// adds visits from XML file
+        /// </summary>
+        /// <param name="file">file path</param>
+        public static void AddVisitXML(string file)
+        {
+            try
+            {
+                XDocument xmlDoc = XDocument.Load(file);
 
-        //        foreach (var visit in xmlDoc.Descendants("Visit"))
-        //        {
-        //            int patientId = int.Parse(visit.Element("PatientId").Value);
-        //            int doctorId = int.Parse(visit.Element("DoctorId").Value);
-        //            string reason = visit.Element("Reason").Value;
-        //            DateTime visitDate = DateTime.Parse(visit.Element("VisitDate").Value);
-        //            decimal price = decimal.Parse(visit.Element("Price").Value);
+                foreach (var visit in xmlDoc.Descendants("Visit"))
+                {
+                    int patientId = int.Parse(visit.Element("PatientId").Value);
+                    int doctorId = int.Parse(visit.Element("DoctorId").Value);
+                    string reason = visit.Element("Reason").Value;
+                    DateTime visitDate = DateTime.Parse(visit.Element("VisitDate").Value);
+                    decimal price = decimal.Parse(visit.Element("Price").Value);
 
-        //            Visit visit1 = new Visit
-        //            {
-        //                Id_pat = patientId,
-        //                Id_doc = doctorId,
-        //                Vis_reason = reason,
-        //                Vis_dat = visitDate,
-        //                Vis_price = price
-        //            };
+                    Console.WriteLine();
 
-        //            Console.WriteLine(visit1);
+                    Visit visit1 = new Visit
+                    {
+                        Patient = PatientHandler.GetPatientById(patientId),
+                        Doctor = DoctorHandler.GetDoctorById(doctorId),
+                        Vis_reason = reason,
+                        Vis_dat = visitDate,
+                        Vis_price = price
+                    };
 
-        //            visitsDAO.Add(visit1);
-        //        }
+                    Console.WriteLine(visit1);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error processing XML file: {ex.Message}");
-        //    }
-        //}
+                    visitsDAO.Add(visit1);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error processing XML file: {ex.Message}");
+            }
+        }
 
     }
 }

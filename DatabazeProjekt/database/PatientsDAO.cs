@@ -8,6 +8,10 @@ namespace DatabazeProjekt.database
     {
         SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
+        /// <summary>
+        /// adds patient to the database
+        /// </summary>
+        /// <param name="entity">patient to add</param>
         public void Add(Patient entity)
         {
             using (SqlCommand command = new SqlCommand(
@@ -46,6 +50,10 @@ namespace DatabazeProjekt.database
             }
         }
 
+        /// <summary>
+        /// gets all patients from the database
+        /// </summary>
+        /// <returns>all patients from the database</returns>
         public IEnumerable<Patient> GetAll()
         {
             using (SqlCommand command = new SqlCommand("SELECT * FROM patients", conn))
@@ -71,6 +79,42 @@ namespace DatabazeProjekt.database
             }
         }
 
+        /// <summary>
+        /// gets patient with specified id
+        /// </summary>
+        /// <param name="id">patients id</param>
+        /// <returns>patient with specified id</returns>
+        public Patient? GetById(int id)
+        {
+            using (SqlCommand command = new SqlCommand("SELECT * FROM patients WHERE id_pat = @Id", conn))
+            {
+                command.Parameters.AddWithValue("@Id", id);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Patient patient = new Patient()
+                        {
+                            Id = reader.GetInt32("id_pat"),
+                            Name = reader.GetString("name"),
+                            Surname = reader.GetString("surname"),
+                            Birth_dat = reader.GetDateTime("birth_dat"),
+                            Birth_num = reader.GetString("birth_num"),
+                            Contact = reader.GetString("contact"),
+                            Height = reader.IsDBNull("height") ? (decimal?)null : reader.GetDecimal("height"),
+                            Weight = reader.IsDBNull("weight") ? (decimal?)null : reader.GetDecimal("weight")
+                        };
+                        return patient;
+                    }
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// updates a patient
+        /// </summary>
+        /// <param name="entity">updated patient</param>
         public void Update(Patient entity)
         {
             using (SqlCommand command = new SqlCommand(

@@ -8,6 +8,10 @@ namespace DatabazeProjekt.database
     {
         SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
+        /// <summary>
+        /// adds lab test
+        /// </summary>
+        /// <param name="entity">test to add</param>
         public void Add(LabTest entity)
         {
             using (SqlCommand command = new SqlCommand("INSERT INTO labTests (patients_id_pat, name, tes_ok, result, tes_dat, notes) " +
@@ -27,6 +31,11 @@ namespace DatabazeProjekt.database
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// gets all tests from database
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<LabTest> GetAll()
         {
             using (SqlCommand command = new SqlCommand("SELECT * FROM labTests", conn))
@@ -40,10 +49,10 @@ namespace DatabazeProjekt.database
                             Id = reader.GetInt32("id_tes"),
                             Id_pat = reader.GetInt32("patients_id_pat"),
                             Name = reader.GetString("name"),
-                            Tes_ok = reader.GetBoolean("tes_ok"),
-                            Result = reader.GetString("result"),
-                            Tes_dat = reader.GetDateTime("tes_dat"),
-                            Notes = reader.GetString("notes")//null
+                            Tes_ok = reader.IsDBNull("tes_ok") ? (bool?)null : reader.GetBoolean("tes_ok"),
+                            Result = reader.IsDBNull("result") ? (string?)null : reader.GetString("result"),
+                            Tes_dat = reader.IsDBNull("tes_dat") ? (DateTime?)null : reader.GetDateTime("tes_dat"),
+                            Notes = reader.IsDBNull("notes") ? (string?)null : reader.GetString("notes")
                         };
                         yield return labTest;
                     }

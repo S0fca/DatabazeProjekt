@@ -8,12 +8,26 @@ namespace DatabazeProjekt.Entities
 
         private static LabTestsDAO labTestsDAO = new LabTestsDAO();
 
+        /// <summary>
+        /// gets all tests
+        /// </summary>
+        /// <returns>all tests</returns>
         public static List<LabTest> GetAllTests()
         {
-            return labTestsDAO.GetAll().ToList();
+            List<LabTest> labTests = labTestsDAO.GetAll().ToList();
+
+            if (labTests.Count == 0)
+            {
+                Console.WriteLine("No tests found.");
+            }
+
+            return labTests;
         }
 
-        //id_tes	patients_id_pat	name	tes_ok	result	tes_dat	notes
+        /// <summary>
+        /// gets test information from console
+        /// adds the test to the DB
+        /// </summary>
         public static void AddTest()
         {
             Patient patient = PatientHandler.GetPatientByBirthNum();
@@ -22,7 +36,7 @@ namespace DatabazeProjekt.Entities
                 Console.WriteLine("Patient not found");
                 return;
             }
-            string name = UserInputManager.GetStringInput("Name: ");
+            string name = UserInputManager.GetStringInput("Test name: ");
             bool? testOk = UserInputManager.GetBoolInputOptional("Was test result ok?: ");
             string? result = UserInputManager.GetStringInputOptional("Result: ");
             DateTime? testDate = UserInputManager.GetDateInputOptional("Test date: ");

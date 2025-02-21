@@ -8,6 +8,10 @@ namespace DatabazeProjekt.database
     {
         SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
+        /// <summary>
+        /// adds report to the database
+        /// </summary>
+        /// <param name="entity">report to add to the database</param>
         public void Add(Report entity)
         {
             using (SqlCommand command = new SqlCommand(
@@ -39,6 +43,10 @@ namespace DatabazeProjekt.database
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// gets all reports from the database
+        /// </summary>
+        /// <returns>all reports from the database</returns>
         public IEnumerable<Report> GetAll()
         {
             using (SqlCommand command = new SqlCommand("SELECT * FROM reports", conn))
@@ -64,6 +72,10 @@ namespace DatabazeProjekt.database
             }
         }
 
+        /// <summary>
+        /// updates a report in database
+        /// </summary>
+        /// <param name="entity">updated report</param>
         public void Update(Report entity)
         {
             using (SqlCommand command = new SqlCommand($"UPDATE reports SET symptoms = '{entity.Symptoms}', diagnosis = '{entity.Diagnosis}', " +
