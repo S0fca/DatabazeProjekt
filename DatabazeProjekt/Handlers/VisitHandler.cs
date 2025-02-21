@@ -86,6 +86,7 @@ namespace DatabazeProjekt.Entities
 
             Console.WriteLine(visit);
             visitsDAO.Add(visit);
+            Console.WriteLine("Visit was added.");
 
             bool report = UserInputManager.GetBoolInput("Add report?");
             if (report)

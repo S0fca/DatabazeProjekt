@@ -27,14 +27,6 @@ namespace DatabazeProjekt.database
                 command.Parameters.AddWithValue("@Weight", entity.Weight.HasValue ? (object)entity.Weight.Value : DBNull.Value);
 
                 int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected == 1)
-                {
-                    Console.WriteLine("Patient added.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to add patient.");
-                }
             }
         }
 
@@ -132,14 +124,6 @@ namespace DatabazeProjekt.database
                 command.Parameters.AddWithValue("@PatientId", entity.Id);
 
                 int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected == 0)
-                {
-                    Console.WriteLine("Patient not found or no changes made.");
-                }
-                else
-                {
-                    Console.WriteLine("Patient information updated successfully.");
-                }
             }
         }
     }

@@ -27,14 +27,6 @@ namespace DatabazeProjekt.database
                 command.Parameters.AddWithValue("@ReportDate", entity.Rep_dat);
 
                 int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected == 1)
-                {
-                    Console.WriteLine("Report added.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to add report.");
-                }
             }
         }
 
@@ -84,14 +76,6 @@ namespace DatabazeProjekt.database
                                              $"WHERE id_rep = {entity.Id}", conn))
             {
                 int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected == 0)
-                {
-                    Console.WriteLine("Report not found or no changes made.");
-                }
-                else
-                {
-                    Console.WriteLine("Report information updated successfully.");
-                }
             }
         }
     }

@@ -24,15 +24,7 @@ namespace DatabazeProjekt.database
                 command.Parameters.AddWithValue("@VisitDate", entity.Vis_dat);
                 command.Parameters.AddWithValue("@VisitPrice", entity.Vis_price);
 
-                int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected == 1)
-                {
-                    Console.WriteLine("Visit added.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to add visit.");
-                }
+                int rowsAffected = command.ExecuteNonQuery(); 
             }
         }
 
@@ -45,10 +37,6 @@ namespace DatabazeProjekt.database
             using (SqlCommand command = new SqlCommand($"DELETE FROM visits WHERE id_vis = {id}", conn))
             {
                 int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected == 0)
-                {
-                    Console.WriteLine("Visit not found.");
-                }
             }
         }
 
@@ -129,7 +117,7 @@ namespace DatabazeProjekt.database
         {
             using (SqlCommand command = new SqlCommand("SELECT * FROM visits v JOIN patients p on p.id_pat = v.patients_id_pat JOIN doctors d on d.id_doc = v.doctors_id_doc WHERE v.id_vis = @VisId;", conn))
             {
-                command.Parameters.AddWithValue("iVisId", id);
+                command.Parameters.AddWithValue("VisId", id);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())

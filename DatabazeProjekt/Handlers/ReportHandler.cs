@@ -48,6 +48,7 @@ namespace DatabazeProjekt.Entities
                 Rep_dat = repDate
             };
             reportsDAO.Add(report);
+            Console.WriteLine("Report was added.");
         }
 
         /// <summary>

@@ -98,6 +98,7 @@ namespace DatabazeProjekt.Entities
         public static void AddPatient()
         {
             patientsDAO.Add(GetPatientInfo());
+            Console.WriteLine("Patient was added.");
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace DatabazeProjekt.database
                 command.Parameters.AddWithValue("@Tes_dat", entity.Tes_dat == null ? (object)DBNull.Value : entity.Tes_dat);
                 command.Parameters.AddWithValue("@Notes", string.IsNullOrEmpty(entity.Notes) ? (object)DBNull.Value : entity.Notes);
 
-                command.ExecuteNonQuery();
+                int rowsAffected = command.ExecuteNonQuery();
             }
         }
         public void Delete(int id)
