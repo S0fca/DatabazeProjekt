@@ -7,12 +7,12 @@ This console application simulates a doctor's office and uses a Microsoft SQL Se
 1. Open **Microsoft SQL Server Management Studio**.
 2. Create a new database
 3. Download database script `Database.sql`
-   - https://github.com/S0fca/DatabazeProjekt/releases/download/v0.1/Database.sql
+   - https://github.com/S0fca/DatabazeProjekt/releases/download/v1.0/Database.sql
 4. **Run the script** in your database
 
 ### 2. Download the project 
 1. Download the project 
-   - https://github.com/S0fca/DatabazeProjekt/releases/download/v0.1/DatabaseProject.zip 
+   - https://github.com/S0fca/DatabazeProjekt/releases/download/v1.0/DatabaseProject.zip
 2. Extract the zip
 
 ### 3. Setup database connection file
