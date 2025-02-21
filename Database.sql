@@ -1,5 +1,3 @@
-USE [clinic]
-GO
 /****** Object:  Table [dbo].[doctors]    Script Date: 20/02/2025 14:15:01 ******/
 SET ANSI_NULLS ON
 GO
@@ -7,9 +5,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[doctors](
 	[id_doc] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](50) NOT NULL,
-	[surname] [varchar](50) NOT NULL,
-	[specialization] [varchar](100) NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+	[surname] [nvarchar](50) NOT NULL,
+	[specialization] [nvarchar](100) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_doc] ASC
@@ -24,11 +22,11 @@ GO
 CREATE TABLE [dbo].[labTests](
 	[id_tes] [int] IDENTITY(1,1) NOT NULL,
 	[patients_id_pat] [int] NOT NULL,
-	[name] [varchar](255) NOT NULL,
+	[name] [nvarchar](255) NOT NULL,
 	[tes_ok] [bit] NULL,
-	[result] [varchar](500) NULL,
+	[result] [nvarchar](500) NULL,
 	[tes_dat] [date] NULL,
-	[notes] [varchar](500) NULL,
+	[notes] [nvarchar](500) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_tes] ASC
@@ -42,11 +40,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[patients](
 	[id_pat] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](50) NOT NULL,
-	[surname] [varchar](50) NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+	[surname] [nvarchar](50) NOT NULL,
 	[birth_dat] [date] NOT NULL,
-	[birth_num] [varchar](11) NOT NULL,
-	[contact] [varchar](100) NOT NULL,
+	[birth_num] [nvarchar](11) NOT NULL,
+	[contact] [nvarchar](100) NOT NULL,
 	[height] [decimal](5, 2) NULL,
 	[weight] [decimal](5, 2) NULL,
 PRIMARY KEY CLUSTERED 
@@ -63,11 +61,11 @@ GO
 CREATE TABLE [dbo].[reports](
 	[id_rep] [int] IDENTITY(1,1) NOT NULL,
 	[visits_id_vis] [int] NOT NULL,
-	[symptoms] [varchar](500) NOT NULL,
-	[diagnosis] [varchar](500) NULL,
-	[recommendation] [varchar](500) NULL,
-	[treatment] [varchar](500) NULL,
-	[conclusion] [varchar](500) NOT NULL,
+	[symptoms] [nvarchar](500) NOT NULL,
+	[diagnosis] [nvarchar](500) NULL,
+	[recommendation] [nvarchar](500) NULL,
+	[treatment] [nvarchar](500) NULL,
+	[conclusion] [nvarchar](500) NOT NULL,
 	[rep_dat] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
@@ -84,7 +82,7 @@ CREATE TABLE [dbo].[visits](
 	[id_vis] [int] IDENTITY(1,1) NOT NULL,
 	[patients_id_pat] [int] NOT NULL,
 	[doctors_id_doc] [int] NOT NULL,
-	[vis_reason] [varchar](255) NOT NULL,
+	[vis_reason] [nvarchar](255) NOT NULL,
 	[vis_dat] [datetime] NOT NULL,
 	[vis_price] [decimal](8, 2) NOT NULL,
 PRIMARY KEY CLUSTERED 
