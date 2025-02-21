@@ -1,6 +1,10 @@
 ﻿namespace Mineraly.UserInterface
 {
-    public class Menu
+    /// <summary>
+    /// Menu class, handles menu and it's items
+    /// </summary>
+    /// Taken from Moodle, with adjustments
+    public class Menu 
     {
         private string menuCaption { get; init; }
         private List<MenuItem> menuItems = new List<MenuItem>();
@@ -9,15 +13,23 @@
         {
             this.menuCaption = menuCaption;
         }
+
+        /// <summary>
+        /// Writes menus caption and menus items
+        /// </summary>
         public void WriteMenuItems()
         {
             Console.WriteLine(menuCaption);
             for (int i = 0; i < menuItems.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {menuItems[i]}");
+                Console.WriteLine($"{i + 1}. {menuItems[i].ToString()}");
             }
         }
 
+        /// <summary>
+        /// Gets menu item selection from console
+        /// </summary>
+        /// <returns>selected menu item</returns>
         public MenuItem? GetSelection()
         {
             int selectionID;
@@ -38,7 +50,11 @@
 
             return menuItems[selectionID - 1];
         }
-
+        
+        /// <summary>
+        /// Gets menu item
+        /// </summary>
+        /// <returns>menu item</returns>
         public MenuItem GetMenuItem()
         {
             MenuItem item = null;
@@ -51,6 +67,10 @@
             return item;
         }
 
+        /// <summary>
+        /// Adds menu item for this menu
+        /// </summary>
+        /// <param name="menuItem">menu item to add to menu</param>
         public void AddMenuItem(MenuItem menuItem)
         {
             menuItems.Add(menuItem);

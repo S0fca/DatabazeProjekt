@@ -97,7 +97,7 @@ namespace DatabazeProjekt.database
                 }
             }
         }
-        
+
         /// <summary>
         /// updates a visit
         /// </summary>

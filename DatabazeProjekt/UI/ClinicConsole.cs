@@ -9,6 +9,10 @@ namespace DatabazeProjekt.UI
 
         private bool exit = false;
 
+        /// <summary>
+        /// statrs the console
+        /// </summary>
+        /// Taken from Moodle 
         public void Start()
         {
             try
@@ -17,12 +21,15 @@ namespace DatabazeProjekt.UI
             }
             catch (SqlException e)
             {
-                Console.WriteLine(e.Message);//
                 Console.WriteLine("Problem with accessing database");
             }
             Console.WriteLine("End");
         }
 
+        /// <summary>
+        /// adds menu items and displays a menu
+        /// </summary>
+        /// Taken from Moodle 
         private void MainMenu()
         {
             Console.WriteLine("Welcome to the clinics database");
@@ -57,11 +64,13 @@ namespace DatabazeProjekt.UI
                     var item = menu.GetMenuItem();
                     item.Execute();
                 })));
-            mainMenu.AddMenuItem(new MenuItem("Exit program", new Action(() => { exit = true; })));
-            mainMenu.AddMenuItem(new MenuItem("Import XML data", new Action(() => {
+            mainMenu.AddMenuItem(new MenuItem("Import XML data", new Action(() =>
+            {
                 VisitHandler.AddVisitXML("visit.xml");
                 ReportHandler.AddReportXML("report.xml");
             })));
+            mainMenu.AddMenuItem(new MenuItem("Exit program", new Action(() => { exit = true; })));
+            
 
             while (!exit)
             {
@@ -70,6 +79,10 @@ namespace DatabazeProjekt.UI
             }
         }
 
+        /// <summary>
+        /// adds patient menu items
+        /// </summary>
+        /// <returns>patient menu</returns>
         private Menu MenuPatients()
         {
             Menu patientMenu = new Menu("Select one option: ");
@@ -122,6 +135,10 @@ namespace DatabazeProjekt.UI
             return patientMenu;
         }
 
+        /// <summary>
+        /// adds doctors menu items
+        /// </summary>
+        /// <returns>doctors menu</returns>
         private Menu MenuDoctors()
         {
             Menu doctorMenu = new Menu("Select one option: ");
@@ -155,6 +172,10 @@ namespace DatabazeProjekt.UI
             return doctorMenu;
         }
 
+        /// <summary>
+        /// adds visit and report menu items
+        /// </summary>
+        /// <returns>visit and report menu</returns>
         private Menu MenuVisitsReports()
         {
             Menu visitsReportsMenu = new Menu("Select one option: ");
@@ -198,6 +219,10 @@ namespace DatabazeProjekt.UI
             return visitsReportsMenu;
         }
 
+        /// <summary>
+        /// adds tests menu items
+        /// </summary>
+        /// <returns>test menu</returns>
         private Menu MenuTests()
         {
             Menu testsMenu = new Menu("Select one option: ");

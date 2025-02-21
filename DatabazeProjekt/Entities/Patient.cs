@@ -23,7 +23,7 @@
 
         public override string? ToString()
         {
-            return $"Name: {name} {surname}, Birth Date: {birth_dat:dd-MM-yyyy}, Birth Number: {birth_num}, Contact: {contact}, Height: {((height is null)?"-":height)}cm, Weight: {((weight is null)?"-":weight)}kg";
+            return $"Name: {name} {surname}, Birth Date: {birth_dat:dd-MM-yyyy}, Birth Number: {birth_num}, Contact: {contact}, Height: {((height is null) ? "-" : height)}cm, Weight: {((weight is null) ? "-" : weight)}kg";
         }
 
     }

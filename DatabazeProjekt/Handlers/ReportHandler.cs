@@ -66,7 +66,7 @@ namespace DatabazeProjekt.Entities
                     string symptoms = report.Element("Symptoms").Value;
                     string conclusion = report.Element("Conclusion").Value;
                     DateTime reportDate = DateTime.Parse(report.Element("ReportDate").Value);
-                    
+
                     string? diagnosis = report.Element("Diagnosis")?.Value;
                     string? recommendation = report.Element("Recommendation")?.Value;
                     string? treatment = report.Element("Treatment")?.Value;

@@ -81,8 +81,8 @@ namespace DatabazeProjekt.Entities
                 Birth_dat = patient.Birth_dat,
                 Birth_num = patient.Birth_num,
                 Contact = string.IsNullOrWhiteSpace(contact) ? patient.Contact : contact,
-                Height = (height is null)? patient.Height: height,
-                Weight = (weight is null)? patient.Weight: weight,
+                Height = (height is null) ? patient.Height : height,
+                Weight = (weight is null) ? patient.Weight : weight,
             };
 
             editedPatint.Id = patient.Id;

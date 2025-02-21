@@ -41,7 +41,7 @@ namespace DatabazeProjekt.database
                 }
             }
         }
-        
+
         /// <summary>
         /// gets all doctors with specified surname
         /// </summary>

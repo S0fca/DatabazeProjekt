@@ -15,7 +15,7 @@ namespace DatabazeProjekt.database
         {
             if (conn == null)
             {
-                string connstring = $"Data Source={ConfigurationManager.AppSettings["DataSource"]};Initial Catalog={ConfigurationManager.AppSettings["InitialCatalog"]};User ID={ConfigurationManager.AppSettings["UserID"]};Password={ConfigurationManager.AppSettings["Password"]};Connect Timeout=30;Trust Server Certificate=True";
+                string connstring = $"Data Source={ConfigurationManager.AppSettings["DataSource"]};Initial Catalog={ConfigurationManager.AppSettings["InitialCatalog"]};User ID={ConfigurationManager.AppSettings["UserID"]};Password={ConfigurationManager.AppSettings["Password"]};Connect Timeout=10;Trust Server Certificate=True";
                 conn = new SqlConnection(connstring);
                 conn.Open();
             }
